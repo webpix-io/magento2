@@ -1,0 +1,21 @@
+{
+  "name": "webpix-io/module-optimizer",
+  "description": "WebPix Optimizer module for Magento 2 storefront images, CSS, JS, SVG and font delivery.",
+  "type": "magento2-module",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1",
+    "magento/framework": "*",
+    "magento/module-catalog": "*",
+    "magento/module-csp": "*",
+    "magento/module-store": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Webpix\\Optimizer\\": ""
+    }
+  }
+}

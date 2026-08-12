@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\View\Asset\Image">
+        <plugin name="webpix_asset_image" type="Webpix\Optimizer\Plugin\AssetImagePlugin"/>
+    </type>
+
+    <type name="Magento\Csp\Model\CompositePolicyCollector">
+        <arguments>
+            <argument name="collectors" xsi:type="array">
+                <item name="webpix_dynamic_cdn" xsi:type="object">Webpix\Optimizer\Model\Csp\DynamicCdnCollector</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webpix" translate="label" sortOrder="10" class="webpix-tab">
+            <label>WebPix</label>
+        </tab>
+        <section id="webpix" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Settings</label>
+            <tab>webpix</tab>
+            <resource>Webpix_Optimizer::optimizer</resource>
+
+            <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10">
+                <label>General Settings</label>
+
+                <field id="enabled" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable extension.</comment>
+                </field>
+                <field id="cdn_mode" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CDN Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[
+                        No = Use default cdn.webpix.io<br/>
+                        Yes = Use custom CDN hostname
+                    ]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="custom_hostname" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom CDN Hostname</label>
+                    <comment><![CDATA[Example: <strong>media.yourdomain.com</strong>]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="cdn_mode">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="access" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20">
+                <label>Access</label>
+
+                <field id="cloud_name" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cloud Name</label>
+                    <comment><![CDATA[Enter public <strong>Cloud Name</strong>]]></comment>
+                    <validate>required-entry validate-length minimum-length-8 maximum-length-8</validate>
+                </field>
+                <field id="secret_key" translate="label" type="obscure" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret Key</label>
+                    <comment><![CDATA[Enter secure <strong>Secret Key</strong>]]></comment>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="secret_pin" translate="label" type="obscure" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret Pin</label>
+                    <comment><![CDATA[Enter secure <strong>Secret Pin</strong>]]></comment>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="encrypt_key" translate="label" type="obscure" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Encrypt Key</label>
+                    <comment><![CDATA[Enter secure <strong>Encrypt Key</strong>]]></comment>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+
+            <group id="image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30">
+                <label>Image</label>
+
+                <field id="secure" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secure Image Url</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable to secure url.]]></comment>
+                </field>
+
+                <field id="quality" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Quality %</label>
+                    <comment><![CDATA[
+                        Enter a compression percentage <strong>between 1 and 100</strong>. Example: <strong>70</strong>
+                    ]]></comment>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-1-100</validate>
+                </field>
+
+                <field id="product_quality" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Image Quality %</label>
+                    <comment><![CDATA[
+                        Quality for catalog and gallery images. Use a slightly lower value to reduce product LCP image size. Example: <strong>70</strong>
+                    ]]></comment>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-1-100</validate>
+                    <depends>
+                        <field id="product">1</field>
+                    </depends>
+                </field>
+
+                <field id="format" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Outgoing Format</label>
+                    <options>
+                        <option label="Webp (Recommended)">webp</option>
+                        <option label="Avif">avif</option>
+                        <option label="Jpg">jpg</option>
+                    </options>
+                    <comment><![CDATA[Modern photo format for web pages]]></comment>
+                </field>
+
+                <field id="resize_mode" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Resize Mode</label>
+                    <options>
+                        <option label="Default">default</option>
+                        <option label="Fit (Keep Proportions)">fit</option>
+                        <option label="Fill (Crop to Size)">fill</option>
+                        <option label="Auto">auto</option>
+                    </options>
+                    <comment><![CDATA[
+                        <strong>Default</strong> keeps Magento-like catalog behavior by resizing by width and preserving source proportions.<br/>
+                        <strong>Fit</strong> keeps original proportions and fits the image into the requested box.<br/>
+                        <strong>Fill</strong> fills the requested box and may crop the image.<br/>
+                        <strong>Auto</strong> leaves resizing behavior to the WebPix backend.
+                    ]]></comment>
+                </field>
+
+                <field id="product" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Product Compression</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable to optimize product images.]]></comment>
+                </field>
+
+                <field id="responsive_gallery" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Responsive Image Srcset</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Add <strong>srcset</strong> and <strong>sizes</strong> to large optimized images so browsers can download smaller WebPix variants.]]></comment>
+                </field>
+
+                <field id="listing_lcp" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Listing LCP Image Optimization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Promote the first product image on listing pages by removing lazy loading, adding <strong>fetchpriority="high"</strong>, and preloading it from the initial HTML.]]></comment>
+                    <depends>
+                        <field id="product">1</field>
+                    </depends>
+                </field>
+
+                <field id="cms" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable CMS Compression</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable to optimize CMS images.]]></comment>
+                </field>
+
+                <field id="svg" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable SVG Optimization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable to route SVG files through the <strong>/svg</strong> WebPix endpoint.]]></comment>
+                </field>
+            </group>
+
+            <group id="css" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40">
+                <label>CSS</label>
+
+                <field id="enabled" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable CSS Optimization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Route stylesheet links through the <strong>/css</strong> WebPix endpoint.]]></comment>
+                </field>
+
+                <field id="secure" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secure CSS Url</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Use encrypted <strong>e1_</strong> CSS links instead of signed <strong>s1_</strong> links.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="js" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50">
+                <label>JS</label>
+
+                <field id="enabled" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable JS Optimization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Route script files through the <strong>/js</strong> WebPix endpoint.]]></comment>
+                </field>
+
+                <field id="secure" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secure JS Url</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Use encrypted <strong>e1_</strong> JS links instead of signed <strong>s1_</strong> links.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="fonts" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60">
+                <label>Fonts</label>
+
+                <field id="enabled" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Optimize Google Fonts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[
+                        Force a <strong>display</strong> strategy for all <strong>fonts.googleapis.com</strong> links and @import rules.
+                    ]]></comment>
+                    <depends>
+                        <field id="general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="display" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Strategy</label>
+                    <options>
+                        <option label="Swap (Recommended)">swap</option>
+                        <option label="Optional (Lower CLS)">optional</option>
+                    </options>
+                    <comment><![CDATA[
+                        <strong>swap</strong> keeps brand font consistency; <strong>optional</strong> usually reduces layout shifts.
+                    ]]></comment>
+                    <depends>
+                        <field id="general/enabled">1</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="force_display" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Override Existing Display Param</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[
+                        If enabled, replaces any existing <strong>display=...</strong> value in Google Fonts URL.
+                    ]]></comment>
+                    <depends>
+                        <field id="general/enabled">1</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
