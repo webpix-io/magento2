@@ -151,12 +151,17 @@ class Data extends AbstractHelper
 
     private function decryptIfNeeded(string $value): string
     {
-        if ($value === '' || strpos($value, '0:') !== 0) {
+        if ($value === '' || !preg_match('/^\d+:/', $value)) {
             return $value;
         }
 
-        $decrypted = $this->encryptor->decrypt($value);
-        return $decrypted !== '' ? $decrypted : $value;
+        try {
+            $decrypted = $this->encryptor->decrypt($value);
+        } catch (\Throwable) {
+            return $value;
+        }
+
+        return is_string($decrypted) && $decrypted !== '' ? $decrypted : $value;
     }
 
     public function isSecureUrl(): bool
