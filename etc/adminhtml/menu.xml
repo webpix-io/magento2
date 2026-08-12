@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webpix_Optimizer::menu"
+             title="WebPix"
+             module="Webpix_Optimizer"
+             sortOrder="58"
+             resource="Webpix_Optimizer::optimizer"/>
+        <add id="Webpix_Optimizer::settings"
+             title="Optimizer Settings"
+             module="Webpix_Optimizer"
+             sortOrder="10"
+             parent="Webpix_Optimizer::menu"
+             action="adminhtml/system_config/edit/section/webpix_optimizer"
+             resource="Webpix_Optimizer::optimizer"/>
+    </menu>
+</config>
