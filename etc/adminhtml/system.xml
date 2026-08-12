@@ -100,7 +100,7 @@
                     <options>
                         <option label="Webp (Recommended)">webp</option>
                         <option label="Avif">avif</option>
-                        <option label="Jpg">jpg</option>
+                        <option label="Jpeg">jpeg</option>
                     </options>
                     <comment><![CDATA[Modern photo format for web pages]]></comment>
                 </field>

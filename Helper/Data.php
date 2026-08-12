@@ -198,7 +198,7 @@ class Data extends AbstractHelper
         }
 
         $format = strtolower(trim((string)$this->scopeConfig->getValue('webpix_optimizer/image/format', ScopeInterface::SCOPE_STORE)));
-        $this->formatCache = $format !== '' ? $format : 'webp';
+        $this->formatCache = $this->normalizeFormat($format);
         return $this->formatCache;
     }
 
@@ -477,5 +477,33 @@ class Data extends AbstractHelper
         }
 
         return rtrim($host, '/');
+    }
+
+    private function normalizeFormat(string $format): string
+    {
+        switch (strtolower(trim($format))) {
+            case 'jpg':
+            case 'jpeg':
+            case 'jpe':
+            case 'jfif':
+            case 'jif':
+            case 'jfi':
+                return 'jpeg';
+            case 'png':
+                return 'png';
+            case 'avif':
+                return 'avif';
+            case 'heif':
+            case 'heic':
+                return 'heif';
+            case 'gif':
+                return 'gif';
+            case 'tif':
+            case 'tiff':
+                return 'tiff';
+            case 'webp':
+            default:
+                return 'webp';
+        }
     }
 }
