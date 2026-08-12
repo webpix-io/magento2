@@ -28,7 +28,6 @@ class ModuleInfo extends Heading
         $html .= '</div>';
         $html .= '<div class="webpix-admin-hero__status"><span>Status</span><strong data-webpix-status>Settings</strong></div>';
         $html .= '</div>';
-        $html .= '<script>' . $this->getScript() . '</script>';
 
         return sprintf(
             '<div id="row_%s" class="webpix-admin-info-row"><div id="%s">%s</div></div>',
@@ -145,103 +144,8 @@ class ModuleInfo extends Heading
     color: #1f1960;
     font-weight: 700;
 }
-.webpix-switch-select {
-    position: absolute !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
-.webpix-switch {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 34px;
-    cursor: pointer;
-}
-.webpix-switch__track {
-    position: relative;
-    width: 54px;
-    height: 30px;
-    display: inline-flex;
-    align-items: center;
-    border-radius: 999px;
-    background: #d0d5dd;
-    transition: background .18s ease;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
-}
-.webpix-switch__thumb {
-    position: absolute;
-    left: 3px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(16,24,40,.22);
-    transition: transform .18s ease;
-}
-.webpix-switch.is-on .webpix-switch__track {
-    background: #62bae9;
-}
-.webpix-switch.is-on .webpix-switch__thumb {
-    transform: translateX(24px);
-}
-.webpix-switch__text {
-    color: #1f1960;
-    font-weight: 700;
-}
+
 CSS;
     }
 
-    private function getScript(): string
-    {
-        return <<<'JS'
-require(['jquery'], function ($) {
-    function isYesNoSelect($select) {
-        var values = [];
-        $select.find('option').each(function () {
-            values.push(String($(this).val()));
-        });
-        return values.indexOf('1') !== -1 && values.indexOf('0') !== -1 && values.length <= 2;
-    }
-
-    function refreshSwitch($select, $switch) {
-        var enabled = String($select.val()) === '1';
-        $switch.toggleClass('is-on', enabled);
-        $switch.find('.webpix-switch__text').text(enabled ? 'Enabled' : 'Disabled');
-    }
-
-    function enhanceSwitches() {
-        $('#webpix_optimizer_general, #webpix_optimizer_image, #webpix_optimizer_css, #webpix_optimizer_js, #webpix_optimizer_fonts')
-            .find('select')
-            .each(function () {
-                var $select = $(this);
-                if ($select.data('webpixSwitch') || !isYesNoSelect($select)) {
-                    return;
-                }
-
-                var $switch = $('<button type="button" class="webpix-switch" aria-label="Toggle setting"><span class="webpix-switch__track"><span class="webpix-switch__thumb"></span></span><span class="webpix-switch__text"></span></button>');
-                $select.addClass('webpix-switch-select').after($switch).data('webpixSwitch', true);
-                refreshSwitch($select, $switch);
-
-                $switch.on('click', function () {
-                    $select.val(String($select.val()) === '1' ? '0' : '1').trigger('change');
-                    refreshSwitch($select, $switch);
-                });
-
-                $select.on('change', function () {
-                    refreshSwitch($select, $switch);
-                    updateStatus();
-                });
-            });
-    }
-
-    function updateStatus() {
-        var enabled = String($('#webpix_optimizer_general_enabled').val()) === '1';
-        $('[data-webpix-status]').text(enabled ? 'Enabled' : 'Disabled');
-    }
-
-    enhanceSwitches();
-    updateStatus();
-});
-JS;
-    }
 }
