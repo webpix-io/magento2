@@ -218,14 +218,14 @@ class Images
         }
 
         $path = strtolower((string)parse_url($url, PHP_URL_PATH));
-        if (strpos($path, '/static/') !== false || strpos($path, '/pub/static/') !== false) {
-            $this->shouldRewriteCache[$url] = false;
-            return $this->shouldRewriteCache[$url];
-        }
-
         $isSvg = strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'svg';
         if ($isSvg) {
             $this->shouldRewriteCache[$url] = $this->dataHelper->isSvgEnabled();
+            return $this->shouldRewriteCache[$url];
+        }
+
+        if (strpos($path, '/static/') !== false || strpos($path, '/pub/static/') !== false) {
+            $this->shouldRewriteCache[$url] = false;
             return $this->shouldRewriteCache[$url];
         }
 
