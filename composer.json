@@ -2,7 +2,22 @@
   "name": "webpix-io/module-optimizer",
   "description": "WebPix Optimizer module for Magento 2 storefront images, CSS, JS, SVG and font delivery.",
   "type": "magento2-module",
+  "homepage": "https://webpix.io/",
   "license": "proprietary",
+  "keywords": [
+    "magento2",
+    "webpix",
+    "image optimization",
+    "webp",
+    "avif",
+    "cdn",
+    "core web vitals"
+  ],
+  "support": {
+    "homepage": "https://webpix.io/",
+    "docs": "https://webpix.io/integrations/magento/",
+    "source": "https://github.com/webpix-io/magento2"
+  },
   "require": {
     "php": ">=8.1",
     "magento/framework": "*",

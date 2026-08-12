@@ -4,6 +4,10 @@ Speed up Magento 2 storefronts with automatic image optimization, modern image c
 
 WebPix Optimizer is a Magento 2 performance module that connects your store to the WebPix CDN. It helps reduce page weight, improve Core Web Vitals, optimize LCP images and deliver storefront assets in modern formats such as WebP and AVIF without manually changing every template.
 
+Website: https://webpix.io/
+
+Magento integration docs: https://webpix.io/integrations/magento/
+
 ## Why use WebPix Optimizer?
 
 Magento stores often ship heavy product images, CMS banners, theme assets and third-party font files. This increases page weight, slows down category and product pages, hurts mobile performance and can reduce conversion rates.

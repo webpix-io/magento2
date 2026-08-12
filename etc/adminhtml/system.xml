@@ -10,6 +10,13 @@
             <tab>webpix_optimizer</tab>
             <resource>Webpix_Optimizer::optimizer</resource>
 
+            <group id="info" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Information</label>
+                <field id="about" translate="label" type="note" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Webpix\Optimizer\Block\Adminhtml\System\Config\ModuleInfo</frontend_model>
+                </field>
+            </group>
+
             <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10">
                 <label>General Settings</label>
 
