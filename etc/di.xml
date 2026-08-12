@@ -12,4 +12,12 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="webpix_optimizer_debug_signature" xsi:type="object">Webpix\Optimizer\Console\Command\DebugSignatureCommand</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

@@ -180,6 +180,16 @@ Clear cache after changing settings:
 php bin/magento cache:flush
 ```
 
+Debug signature generation without printing secret values:
+
+```bash
+php bin/magento webpix:optimizer:debug-signature \
+  --source=webpix.io/media/webpix/sha256.webp \
+  --quality=75 \
+  --format=webp \
+  --resize=fit
+```
+
 Open a product, category or CMS page and inspect the HTML. Optimized image URLs should look like:
 
 ```text
