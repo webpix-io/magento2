@@ -95,12 +95,6 @@ Open Magento admin:
 Stores > Configuration > WebPix Optimizer > Settings
 ```
 
-You can also open the same section from the Magento admin menu:
-
-```text
-WebPix > Optimizer Settings
-```
-
 Since version `1.0.2`, WebPix Optimizer uses its own configuration section and config paths under `webpix_optimizer/...`. If you upgraded from an older version, re-enter the WebPix credentials in the new `WebPix Optimizer` section.
 
 Version `1.0.4` improves reading Magento encrypted configuration values when the store uses a non-zero encryption key version.
