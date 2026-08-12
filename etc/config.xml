@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <webpix>
+        <webpix_optimizer>
             <general>
                 <enabled>0</enabled>
                 <cdn_mode>0</cdn_mode>
@@ -34,6 +34,6 @@
                 <display>swap</display>
                 <force_display>1</force_display>
             </fonts>
-        </webpix>
+        </webpix_optimizer>
     </default>
 </config>

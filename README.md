@@ -88,8 +88,10 @@ php bin/magento cache:flush
 Open Magento admin:
 
 ```text
-Stores > Configuration > WebPix > Settings
+Stores > Configuration > WebPix Optimizer > Settings
 ```
+
+Since version `1.0.2`, WebPix Optimizer uses its own configuration section and config paths under `webpix_optimizer/...`. If you upgraded from an older version, re-enter the WebPix credentials in the new `WebPix Optimizer` section.
 
 Enable the module:
 
@@ -201,14 +203,14 @@ Depending on enabled settings, you may also see:
 Temporarily disable WebPix optimization without removing the module:
 
 ```bash
-php bin/magento config:set webpix/general/enabled 0
+php bin/magento config:set webpix_optimizer/general/enabled 0
 php bin/magento cache:flush
 ```
 
 Enable it again:
 
 ```bash
-php bin/magento config:set webpix/general/enabled 1
+php bin/magento config:set webpix_optimizer/general/enabled 1
 php bin/magento cache:flush
 ```
 

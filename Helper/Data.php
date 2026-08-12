@@ -63,7 +63,7 @@ class Data extends AbstractHelper
             return $this->enabledCache;
         }
 
-        $this->enabledCache = $this->scopeConfig->isSetFlag('webpix/general/enabled', ScopeInterface::SCOPE_STORE);
+        $this->enabledCache = $this->scopeConfig->isSetFlag('webpix_optimizer/general/enabled', ScopeInterface::SCOPE_STORE);
         return $this->enabledCache;
     }
 
@@ -73,7 +73,7 @@ class Data extends AbstractHelper
             return $this->customCdnCache;
         }
 
-        $this->customCdnCache = $this->scopeConfig->isSetFlag('webpix/general/cdn_mode', ScopeInterface::SCOPE_STORE);
+        $this->customCdnCache = $this->scopeConfig->isSetFlag('webpix_optimizer/general/cdn_mode', ScopeInterface::SCOPE_STORE);
         return $this->customCdnCache;
     }
 
@@ -83,7 +83,7 @@ class Data extends AbstractHelper
             return $this->customHostnameCache;
         }
 
-        $this->customHostnameCache = trim((string)$this->scopeConfig->getValue('webpix/general/custom_hostname', ScopeInterface::SCOPE_STORE));
+        $this->customHostnameCache = trim((string)$this->scopeConfig->getValue('webpix_optimizer/general/custom_hostname', ScopeInterface::SCOPE_STORE));
         return $this->customHostnameCache;
     }
 
@@ -112,7 +112,7 @@ class Data extends AbstractHelper
             return $this->cloudNameCache;
         }
 
-        $this->cloudNameCache = trim((string)$this->scopeConfig->getValue('webpix/access/cloud_name', ScopeInterface::SCOPE_STORE));
+        $this->cloudNameCache = trim((string)$this->scopeConfig->getValue('webpix_optimizer/access/cloud_name', ScopeInterface::SCOPE_STORE));
         return $this->cloudNameCache;
     }
 
@@ -122,7 +122,7 @@ class Data extends AbstractHelper
             return $this->secretKeyCache;
         }
 
-        $value = (string)$this->scopeConfig->getValue('webpix/access/secret_key', ScopeInterface::SCOPE_STORE);
+        $value = (string)$this->scopeConfig->getValue('webpix_optimizer/access/secret_key', ScopeInterface::SCOPE_STORE);
         $this->secretKeyCache = trim($this->decryptIfNeeded($value));
         return $this->secretKeyCache;
     }
@@ -133,7 +133,7 @@ class Data extends AbstractHelper
             return $this->secretPinCache;
         }
 
-        $value = (string)$this->scopeConfig->getValue('webpix/access/secret_pin', ScopeInterface::SCOPE_STORE);
+        $value = (string)$this->scopeConfig->getValue('webpix_optimizer/access/secret_pin', ScopeInterface::SCOPE_STORE);
         $this->secretPinCache = trim($this->decryptIfNeeded($value));
         return $this->secretPinCache;
     }
@@ -144,7 +144,7 @@ class Data extends AbstractHelper
             return $this->encryptKeyCache;
         }
 
-        $value = (string)$this->scopeConfig->getValue('webpix/access/encrypt_key', ScopeInterface::SCOPE_STORE);
+        $value = (string)$this->scopeConfig->getValue('webpix_optimizer/access/encrypt_key', ScopeInterface::SCOPE_STORE);
         $this->encryptKeyCache = trim($this->decryptIfNeeded($value));
         return $this->encryptKeyCache;
     }
@@ -165,7 +165,7 @@ class Data extends AbstractHelper
             return $this->secureUrlCache;
         }
 
-        $this->secureUrlCache = $this->scopeConfig->isSetFlag('webpix/image/secure', ScopeInterface::SCOPE_STORE);
+        $this->secureUrlCache = $this->scopeConfig->isSetFlag('webpix_optimizer/image/secure', ScopeInterface::SCOPE_STORE);
         return $this->secureUrlCache;
     }
 
@@ -175,7 +175,7 @@ class Data extends AbstractHelper
             return $this->qualityCache;
         }
 
-        $quality = (int)$this->scopeConfig->getValue('webpix/image/quality', ScopeInterface::SCOPE_STORE);
+        $quality = (int)$this->scopeConfig->getValue('webpix_optimizer/image/quality', ScopeInterface::SCOPE_STORE);
         $this->qualityCache = $quality > 0 ? min($quality, 100) : 75;
         return $this->qualityCache;
     }
@@ -186,7 +186,7 @@ class Data extends AbstractHelper
             return $this->productQualityCache;
         }
 
-        $quality = (int)$this->scopeConfig->getValue('webpix/image/product_quality', ScopeInterface::SCOPE_STORE);
+        $quality = (int)$this->scopeConfig->getValue('webpix_optimizer/image/product_quality', ScopeInterface::SCOPE_STORE);
         $this->productQualityCache = $quality > 0 ? min($quality, 100) : $this->getQuality();
         return $this->productQualityCache;
     }
@@ -197,7 +197,7 @@ class Data extends AbstractHelper
             return $this->formatCache;
         }
 
-        $format = strtolower(trim((string)$this->scopeConfig->getValue('webpix/image/format', ScopeInterface::SCOPE_STORE)));
+        $format = strtolower(trim((string)$this->scopeConfig->getValue('webpix_optimizer/image/format', ScopeInterface::SCOPE_STORE)));
         $this->formatCache = $format !== '' ? $format : 'webp';
         return $this->formatCache;
     }
@@ -208,7 +208,7 @@ class Data extends AbstractHelper
             return $this->resizeModeCache;
         }
 
-        $mode = strtolower(trim((string)$this->scopeConfig->getValue('webpix/image/resize_mode', ScopeInterface::SCOPE_STORE)));
+        $mode = strtolower(trim((string)$this->scopeConfig->getValue('webpix_optimizer/image/resize_mode', ScopeInterface::SCOPE_STORE)));
         $this->resizeModeCache = in_array($mode, self::SUPPORTED_IMAGE_MODES, true) ? $mode : self::DEFAULT_CLIENT_IMAGE_MODE;
         return $this->resizeModeCache;
     }
@@ -219,7 +219,7 @@ class Data extends AbstractHelper
             return $this->productEnabledCache;
         }
 
-        $this->productEnabledCache = $this->scopeConfig->isSetFlag('webpix/image/product', ScopeInterface::SCOPE_STORE);
+        $this->productEnabledCache = $this->scopeConfig->isSetFlag('webpix_optimizer/image/product', ScopeInterface::SCOPE_STORE);
         return $this->productEnabledCache;
     }
 
@@ -230,7 +230,7 @@ class Data extends AbstractHelper
         }
 
         $this->responsiveGalleryEnabledCache = $this->scopeConfig->isSetFlag(
-            'webpix/image/responsive_gallery',
+            'webpix_optimizer/image/responsive_gallery',
             ScopeInterface::SCOPE_STORE
         );
 
@@ -244,7 +244,7 @@ class Data extends AbstractHelper
         }
 
         $this->listingLcpEnabledCache = $this->scopeConfig->isSetFlag(
-            'webpix/image/listing_lcp',
+            'webpix_optimizer/image/listing_lcp',
             ScopeInterface::SCOPE_STORE
         );
 
@@ -257,7 +257,7 @@ class Data extends AbstractHelper
             return $this->cmsEnabledCache;
         }
 
-        $this->cmsEnabledCache = $this->scopeConfig->isSetFlag('webpix/image/cms', ScopeInterface::SCOPE_STORE);
+        $this->cmsEnabledCache = $this->scopeConfig->isSetFlag('webpix_optimizer/image/cms', ScopeInterface::SCOPE_STORE);
         return $this->cmsEnabledCache;
     }
 
@@ -267,7 +267,7 @@ class Data extends AbstractHelper
             return $this->svgEnabledCache;
         }
 
-        $this->svgEnabledCache = $this->scopeConfig->isSetFlag('webpix/image/svg', ScopeInterface::SCOPE_STORE);
+        $this->svgEnabledCache = $this->scopeConfig->isSetFlag('webpix_optimizer/image/svg', ScopeInterface::SCOPE_STORE);
         return $this->svgEnabledCache;
     }
 
@@ -278,7 +278,7 @@ class Data extends AbstractHelper
         }
 
         $this->googleFontsEnabledCache = $this->isEnabled()
-            && $this->scopeConfig->isSetFlag('webpix/fonts/enabled', ScopeInterface::SCOPE_STORE);
+            && $this->scopeConfig->isSetFlag('webpix_optimizer/fonts/enabled', ScopeInterface::SCOPE_STORE);
 
         return $this->googleFontsEnabledCache;
     }
@@ -289,7 +289,7 @@ class Data extends AbstractHelper
             return $this->googleFontsDisplayCache;
         }
 
-        $display = strtolower(trim((string)$this->scopeConfig->getValue('webpix/fonts/display', ScopeInterface::SCOPE_STORE)));
+        $display = strtolower(trim((string)$this->scopeConfig->getValue('webpix_optimizer/fonts/display', ScopeInterface::SCOPE_STORE)));
         $this->googleFontsDisplayCache = in_array($display, self::SUPPORTED_GOOGLE_FONTS_DISPLAY, true)
             ? $display
             : self::DEFAULT_GOOGLE_FONTS_DISPLAY;
@@ -303,7 +303,7 @@ class Data extends AbstractHelper
             return $this->googleFontsForceDisplayCache;
         }
 
-        $this->googleFontsForceDisplayCache = $this->scopeConfig->isSetFlag('webpix/fonts/force_display', ScopeInterface::SCOPE_STORE);
+        $this->googleFontsForceDisplayCache = $this->scopeConfig->isSetFlag('webpix_optimizer/fonts/force_display', ScopeInterface::SCOPE_STORE);
         return $this->googleFontsForceDisplayCache;
     }
 

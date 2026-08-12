@@ -36,7 +36,7 @@ class Css extends AbstractHelper
             return $this->enabledCache;
         }
 
-        $this->enabledCache = $this->scopeConfig->isSetFlag('webpix/css/enabled', ScopeInterface::SCOPE_STORE);
+        $this->enabledCache = $this->scopeConfig->isSetFlag('webpix_optimizer/css/enabled', ScopeInterface::SCOPE_STORE);
         return $this->enabledCache;
     }
 
@@ -46,7 +46,7 @@ class Css extends AbstractHelper
             return $this->secureCache;
         }
 
-        $this->secureCache = $this->scopeConfig->isSetFlag('webpix/css/secure', ScopeInterface::SCOPE_STORE);
+        $this->secureCache = $this->scopeConfig->isSetFlag('webpix_optimizer/css/secure', ScopeInterface::SCOPE_STORE);
         return $this->secureCache;
     }
 

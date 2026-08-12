@@ -2,12 +2,12 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="webpix" translate="label" sortOrder="10" class="webpix-tab">
-            <label>WebPix</label>
+        <tab id="webpix_optimizer" translate="label" sortOrder="10" class="webpix-optimizer-tab">
+            <label>WebPix Optimizer</label>
         </tab>
-        <section id="webpix" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="webpix_optimizer" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Settings</label>
-            <tab>webpix</tab>
+            <tab>webpix_optimizer</tab>
             <resource>Webpix_Optimizer::optimizer</resource>
 
             <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10">

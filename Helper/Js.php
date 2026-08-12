@@ -44,7 +44,7 @@ class Js extends AbstractHelper
             return $this->enabledCache;
         }
 
-        $this->enabledCache = $this->scopeConfig->isSetFlag('webpix/js/enabled', ScopeInterface::SCOPE_STORE);
+        $this->enabledCache = $this->scopeConfig->isSetFlag('webpix_optimizer/js/enabled', ScopeInterface::SCOPE_STORE);
         return $this->enabledCache;
     }
 
@@ -54,7 +54,7 @@ class Js extends AbstractHelper
             return $this->secureCache;
         }
 
-        $this->secureCache = $this->scopeConfig->isSetFlag('webpix/js/secure', ScopeInterface::SCOPE_STORE);
+        $this->secureCache = $this->scopeConfig->isSetFlag('webpix_optimizer/js/secure', ScopeInterface::SCOPE_STORE);
         return $this->secureCache;
     }
 
