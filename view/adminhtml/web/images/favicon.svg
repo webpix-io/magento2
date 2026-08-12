@@ -1,0 +1,6 @@
+<svg viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#fff" fill-opacity=".01" d="M0 0h48v48H0z"/>
+  <path d="M20 4H4v16h16zm0 24H4v16h16zM44 4H28v16h16z" fill="#62bae9" stroke="#1f1960" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M30.002 28v16M42 28v16" stroke="#1f1960" stroke-width="4" stroke-linecap="round"/>
+  <text x="56" y="38" font-family="Plus Jakarta Sans, sans-serif" font-weight="600" font-size="40" fill="#1b145d" letter-spacing="-1">WebPix</text>
+</svg>
