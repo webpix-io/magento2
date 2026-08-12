@@ -1,0 +1,21 @@
+.admin__menu .item-webpix-optimizer.parent.level-0 > a:before,
+.admin__menu .item-webpix_optimizer.parent.level-0 > a:before {
+    content: '';
+    width: 2.8rem;
+    height: 2.8rem;
+    margin: 0 auto .2rem;
+    display: block;
+    background-color: #62bae9;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M20 4H4v16h16zm0 24H4v16h16zM44 4H28v16h16z' fill='currentColor'/%3E%3Cpath d='M30 28v16M42 28v16' stroke='currentColor' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M20 4H4v16h16zm0 24H4v16h16zM44 4H28v16h16z' fill='currentColor'/%3E%3Cpath d='M30 28v16M42 28v16' stroke='currentColor' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    font-family: inherit;
+    font-size: 0;
+    padding: 0;
+}
+
+.admin__menu .item-webpix-optimizer.parent.level-0:hover > a:before,
+.admin__menu .item-webpix-optimizer.parent.level-0._active > a:before,
+.admin__menu .item-webpix_optimizer.parent.level-0:hover > a:before,
+.admin__menu .item-webpix_optimizer.parent.level-0._active > a:before {
+    background-color: #ffffff;
+}
