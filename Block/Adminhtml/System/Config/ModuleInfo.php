@@ -26,13 +26,15 @@ class ModuleInfo extends Heading
             $version = '1.0.0';
         }
 
-        $html = '<strong>WebPix Optimizer</strong>';
-        $html .= '<p>Connect Magento 2 storefront assets to WebPix CDN for image compression, WebP/AVIF delivery, SVG optimization, CSS/JS delivery and Core Web Vitals improvements.</p>';
-        $html .= '<p><strong>Service:</strong> <a href="https://webpix.io/" target="_blank" rel="noopener">https://webpix.io/</a></p>';
+        $html = '<strong>WebPix Optimizer for Magento 2</strong>';
+        $html .= '<p>WebPix Optimizer connects your Magento storefront to WebPix CDN and automatically routes images, SVG files, CSS and JavaScript through optimized delivery endpoints. It helps reduce page weight, serve WebP or AVIF images, improve LCP and Core Web Vitals, and keep theme templates clean without manual URL changes.</p>';
+        $html .= '<p>Use this section to enable optimization, add your WebPix access credentials, choose image quality and configure asset delivery for the storefront.</p>';
+        $html .= '<p><strong>Service:</strong> <a href="https://webpix.io" target="_blank" rel="noopener">https://webpix.io</a></p>';
+        $html .= '<p><strong>Magento docs:</strong> <a href="https://webpix.io/integrations/magento" target="_blank" rel="noopener">https://webpix.io/integrations/magento</a></p>';
         $html .= '<p><strong>Version:</strong> ' . htmlspecialchars($version, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</p>';
 
         return sprintf(
-            '<div class="system-fieldset-sub-head" id="row_%s"><span id="%s">%s</span></div>',
+            '<div id="row_%s"><div id="%s" style="margin:0 0 18px;padding:14px 18px;background:#f8fafc;border-left:4px solid #007bdb;">%s</div></div>',
             $element->getHtmlId(),
             $element->getHtmlId(),
             $html
