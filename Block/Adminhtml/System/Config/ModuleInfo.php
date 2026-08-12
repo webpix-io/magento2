@@ -26,7 +26,6 @@ class ModuleInfo extends Heading
         $html .= '<p>Connect your Magento storefront to WebPix CDN and automatically route product images, CMS images, SVG files, CSS, JavaScript and Google Fonts through optimized delivery controls. Reduce page weight, serve WebP or AVIF images, improve LCP and Core Web Vitals, and keep theme templates clean without manual URL rewrites.</p>';
         $html .= '<a href="https://webpix.io/integrations/magento" target="_blank" rel="noopener">Open Magento integration guide</a>';
         $html .= '</div>';
-        $html .= '<div class="webpix-admin-hero__status"><span>Status</span><strong data-webpix-status>Settings</strong></div>';
         $html .= '</div>';
 
         return sprintf(
@@ -95,15 +94,8 @@ class ModuleInfo extends Heading
     font-weight: 700;
     text-decoration: none;
 }
-.webpix-admin-hero a:hover {
-    text-decoration: underline;
-}
-.webpix-admin-hero__status {
-    padding: 16px;
-    border-radius: 10px;
-    background: #f1f8fc;
-    border: 1px solid #cbeafe;
-}
+
+
 .webpix-admin-hero__status span {
     display: block;
     margin-bottom: 5px;
@@ -116,34 +108,7 @@ class ModuleInfo extends Heading
     color: #1f1960;
     font-size: 20px;
 }
-#webpix_optimizer_general,
-#webpix_optimizer_access,
-#webpix_optimizer_image,
-#webpix_optimizer_css,
-#webpix_optimizer_js,
-#webpix_optimizer_fonts {
-    border: 1px solid #dbe7f3;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 22px rgba(31,25,96,.045);
-}
-#webpix_optimizer_general .config,
-#webpix_optimizer_access .config,
-#webpix_optimizer_image .config,
-#webpix_optimizer_css .config,
-#webpix_optimizer_js .config,
-#webpix_optimizer_fonts .config {
-    background: #fff;
-}
-#webpix_optimizer_general .label,
-#webpix_optimizer_access .label,
-#webpix_optimizer_image .label,
-#webpix_optimizer_css .label,
-#webpix_optimizer_js .label,
-#webpix_optimizer_fonts .label {
-    color: #1f1960;
-    font-weight: 700;
-}
+
 
 CSS;
     }
