@@ -136,6 +136,12 @@
                     <comment><![CDATA[Add <strong>srcset</strong> and <strong>sizes</strong> to large optimized images so browsers can download smaller WebPix variants.]]></comment>
                 </field>
 
+                <field id="auto_dimensions" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add Missing Image Width and Height</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Automatically add missing <strong>width</strong> and <strong>height</strong> attributes when image dimensions can be detected from attributes, inline styles, cache filenames, or local media files.]]></comment>
+                </field>
+
                 <field id="listing_lcp" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Listing LCP Image Optimization</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

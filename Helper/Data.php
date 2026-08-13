@@ -36,6 +36,7 @@ class Data extends AbstractHelper
     private ?string $resizeModeCache = null;
     private ?bool $productEnabledCache = null;
     private ?bool $responsiveGalleryEnabledCache = null;
+    private ?bool $autoDimensionsEnabledCache = null;
     private ?bool $listingLcpEnabledCache = null;
     private ?bool $cmsEnabledCache = null;
     private ?bool $svgEnabledCache = null;
@@ -240,6 +241,20 @@ class Data extends AbstractHelper
         );
 
         return $this->responsiveGalleryEnabledCache;
+    }
+
+    public function isAutoDimensionsEnabled(): bool
+    {
+        if ($this->autoDimensionsEnabledCache !== null) {
+            return $this->autoDimensionsEnabledCache;
+        }
+
+        $this->autoDimensionsEnabledCache = $this->scopeConfig->isSetFlag(
+            'webpix_optimizer/image/auto_dimensions',
+            ScopeInterface::SCOPE_STORE
+        );
+
+        return $this->autoDimensionsEnabledCache;
     }
 
     public function isListingLcpOptimizationEnabled(): bool

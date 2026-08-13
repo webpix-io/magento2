@@ -15,6 +15,7 @@
                 <format>webp</format>
                 <resize_mode>default</resize_mode>
                 <product>1</product>
+                <auto_dimensions>1</auto_dimensions>
                 <responsive_gallery>1</responsive_gallery>
                 <listing_lcp>1</listing_lcp>
                 <cms>1</cms>

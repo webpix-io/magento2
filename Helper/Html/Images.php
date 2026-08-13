@@ -5,6 +5,8 @@ namespace Webpix\Optimizer\Helper\Html;
 
 use Webpix\Optimizer\Helper\Data;
 use Webpix\Optimizer\Helper\Image;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Filesystem;
 
 class Images
 {
@@ -19,7 +21,8 @@ class Images
 
     public function __construct(
         private readonly Data $dataHelper,
-        private readonly Image $imageHelper
+        private readonly Image $imageHelper,
+        private readonly Filesystem $filesystem
     ) {
     }
 
@@ -84,6 +87,10 @@ class Images
                     $tag,
                     1
                 );
+
+                if ($this->dataHelper->isAutoDimensionsEnabled()) {
+                    $tag = $this->addMissingImageDimensions($tag, $dimensions);
+                }
 
                 if (stripos($tag, 'srcset=') !== false) {
                     $tag = $this->replaceImgSrcsetUrls($tag, $dimensions['width'], $dimensions['height']);
@@ -304,6 +311,31 @@ class Images
         return (string)preg_replace('/\s*\/?>$/', $attributes . '$0', $tag, 1);
     }
 
+    private function addMissingImageDimensions(string $tag, array $dimensions): string
+    {
+        $width = (int)($dimensions['width'] ?? 0);
+        $height = (int)($dimensions['height'] ?? 0);
+
+        if ($width <= 0 || $height <= 0) {
+            return $tag;
+        }
+
+        $attributes = '';
+        if (stripos($tag, ' width=') === false) {
+            $attributes .= ' width="' . $width . '"';
+        }
+
+        if (stripos($tag, ' height=') === false) {
+            $attributes .= ' height="' . $height . '"';
+        }
+
+        if ($attributes === '') {
+            return $tag;
+        }
+
+        return (string)preg_replace('/\s*\/?>$/', $attributes . '$0', $tag, 1);
+    }
+
     private function getResponsiveWidths(int $originalWidth): array
     {
         $widths = array_filter(
@@ -451,10 +483,90 @@ class Images
 
     private function extractImageDimensions(string $tag): array
     {
+        $src = $this->extractAttribute($tag, 'src');
+        $width = $this->extractPositiveIntAttribute($tag, 'width');
+        $height = $this->extractPositiveIntAttribute($tag, 'height');
+
+        if ($width <= 0) {
+            $width = $this->extractPositiveIntAttribute($tag, 'data-width');
+        }
+
+        if ($height <= 0) {
+            $height = $this->extractPositiveIntAttribute($tag, 'data-height');
+        }
+
+        if (($width <= 0 || $height <= 0) && preg_match('/\sstyle=["\']([^"\']+)["\']/i', $tag, $styleMatch)) {
+            $style = $styleMatch[1];
+
+            if ($width <= 0 && preg_match('/(?:^|;)\s*(?:width|max-width)\s*:\s*([0-9]+)(?:px)?\b/i', $style, $widthMatch)) {
+                $width = max(0, (int)$widthMatch[1]);
+            }
+
+            if ($height <= 0 && preg_match('/(?:^|;)\s*(?:height|max-height)\s*:\s*([0-9]+)(?:px)?\b/i', $style, $heightMatch)) {
+                $height = max(0, (int)$heightMatch[1]);
+            }
+        }
+
+        if (($width <= 0 || $height <= 0) && $src !== '') {
+            $urlPath = parse_url(html_entity_decode($src, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'), PHP_URL_PATH);
+            $path = $urlPath ?: $src;
+
+            if (preg_match('/(?:^|[-_\/])([1-9][0-9]{0,4})x([1-9][0-9]{0,4})(?=[^0-9]|$)/i', $path, $sizeMatch)) {
+                if ($width <= 0) {
+                    $width = (int)$sizeMatch[1];
+                }
+
+                if ($height <= 0) {
+                    $height = (int)$sizeMatch[2];
+                }
+            }
+        }
+
+        if (($width <= 0 || $height <= 0) && $src !== '') {
+            $fileDimensions = $this->getLocalMediaDimensions($src);
+            if ($width <= 0) {
+                $width = $fileDimensions['width'];
+            }
+            if ($height <= 0) {
+                $height = $fileDimensions['height'];
+            }
+        }
+
         return [
-            'width' => $this->extractPositiveIntAttribute($tag, 'width'),
-            'height' => $this->extractPositiveIntAttribute($tag, 'height'),
+            'width' => $width,
+            'height' => $height,
         ];
+    }
+
+    private function getLocalMediaDimensions(string $src): array
+    {
+        $empty = ['width' => 0, 'height' => 0];
+        $path = (string)parse_url(html_entity_decode($src, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'), PHP_URL_PATH);
+        if ($path === '' || strpos($path, '/media/') === false) {
+            return $empty;
+        }
+
+        $relative = preg_replace('#^.*?/media/#', '', $path, 1);
+        if (!is_string($relative) || $relative === '' || str_contains($relative, '..')) {
+            return $empty;
+        }
+
+        try {
+            $mediaDirectory = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA);
+            if (!$mediaDirectory->isExist($relative)) {
+                return $empty;
+            }
+            $file = $mediaDirectory->getAbsolutePath($relative);
+        } catch (\Throwable) {
+            return $empty;
+        }
+
+        $size = @getimagesize($file);
+        if (!is_array($size) || empty($size[0]) || empty($size[1])) {
+            return $empty;
+        }
+
+        return ['width' => (int)$size[0], 'height' => (int)$size[1]];
     }
 
     private function extractPositiveIntAttribute(string $tag, string $attribute): int

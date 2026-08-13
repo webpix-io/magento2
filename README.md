@@ -144,6 +144,7 @@ Image > Product Image Quality % = 70
 Image > Outgoing Format = Webp
 Image > Resize Mode = Default
 Image > Enable Product Compression = Yes
+Image > Add Missing Image Width and Height = Yes
 Image > Enable Responsive Image Srcset = Yes
 Image > Enable Listing LCP Image Optimization = Yes
 Image > Enable CMS Compression = Yes
